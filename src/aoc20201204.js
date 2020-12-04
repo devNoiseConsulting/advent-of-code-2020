@@ -33,10 +33,7 @@ console.log(numberOfPassorts);
 let checkYears = function(status, year, lowYear, highYear) {
   year = parseInt(year);
   if (year) {
-    if (year < lowYear) {
-      status = false;
-    }
-    if (year > highYear) {
+    if (year < lowYear || year > highYear) {
       status = false;
     }
   } else {
@@ -62,17 +59,11 @@ numberOfPassorts = passports.reduce((acc, p) => {
       if (key == "hgt") {
         let hgt = parseInt(p[key].replace(/cm|in/, ''));
         if (p[key].endsWith("cm")) {
-          if (hgt < 150) {
-            acc = false;
-          }
-          if (hgt > 193) {
+          if (hgt < 150 || hgt > 193) {
             acc = false
           }
         } else if (p[key].endsWith("in")) {
-          if (hgt < 59) {
-            acc = false;
-          }
-          if (hgt > 76) {
+          if (hgt < 59 || hgt > 76) {
             acc = false
           }
         } else {
