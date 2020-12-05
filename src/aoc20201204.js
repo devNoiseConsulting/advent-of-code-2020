@@ -1,5 +1,5 @@
 var fs = require("fs");
-var path = require('path');
+var path = require("path");
 
 let file = path.join(__dirname, "..", "data", "day4.txt");
 var passports = fs.readFileSync(file, "utf-8");
@@ -30,18 +30,18 @@ numberOfPassorts = passports.reduce((acc, p) => {
 console.log(numberOfPassorts);
 // 113 is to low
 
-let checkYears = function(status, year, lowYear, highYear) {
+let checkYears = function (status, year, lowYear, highYear) {
   year = parseInt(year);
   if (year) {
     if (year < lowYear || year > highYear) {
       status = false;
     }
   } else {
-    console.log('byr');
+    console.log("byr");
     status = false;
   }
   return status;
-}
+};
 
 numberOfPassorts = passports.reduce((acc, p) => {
   let keys = Object.keys(p);
@@ -57,14 +57,14 @@ numberOfPassorts = passports.reduce((acc, p) => {
         acc = checkYears(acc, p[key], 2020, 2030);
       }
       if (key == "hgt") {
-        let hgt = parseInt(p[key].replace(/cm|in/, ''));
+        let hgt = parseInt(p[key].replace(/cm|in/, ""));
         if (p[key].endsWith("cm")) {
           if (hgt < 150 || hgt > 193) {
-            acc = false
+            acc = false;
           }
         } else if (p[key].endsWith("in")) {
           if (hgt < 59 || hgt > 76) {
-            acc = false
+            acc = false;
           }
         } else {
           acc = false;
@@ -76,7 +76,7 @@ numberOfPassorts = passports.reduce((acc, p) => {
         }
       }
       if (key == "ecl") {
-        let eyeColors = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'];
+        let eyeColors = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
         if (!eyeColors.includes(p[key])) {
           acc = false;
         }
@@ -89,7 +89,9 @@ numberOfPassorts = passports.reduce((acc, p) => {
 
       return acc;
     }, true);
-    if (valid) {acc++} ;
+    if (valid) {
+      acc++;
+    }
   }
   return acc;
 }, 0);
