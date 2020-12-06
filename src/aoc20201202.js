@@ -1,8 +1,8 @@
 var fs = require("fs");
-var path = require('path');
+var path = require("path");
 
 let file = path.join(__dirname, "..", "data", "day2.txt");
-var passwords = fs.readFileSync(file, "utf-8").split("\n");
+var passwords = fs.readFileSync(file, "utf-8").trim().split("\n");
 
 let goodPasswords = passwords.reduce((acc, value) => {
   let [low, high, letter, password] = value.split(/[- :] ?/);

@@ -1,8 +1,8 @@
 var fs = require("fs");
-var path = require('path');
+var path = require("path");
 
 let file = path.join(__dirname, "..", "data", "day1.txt");
-var text = fs.readFileSync(file, "utf-8");
+var text = fs.readFileSync(file, "utf-8").trim();
 var numbers = text.split("\n");
 numbers = numbers.map((i) => parseInt(i));
 

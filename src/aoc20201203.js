@@ -1,9 +1,10 @@
 var fs = require("fs");
-var path = require('path');
+var path = require("path");
 
 let file = path.join(__dirname, "..", "data", "day3.txt");
 var hill = fs
   .readFileSync(file, "utf-8")
+  .trim()
   .split("\n")
   .map((r) => r.split(""));
 

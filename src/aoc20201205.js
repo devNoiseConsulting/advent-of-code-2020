@@ -2,7 +2,7 @@ var fs = require("fs");
 var path = require("path");
 
 let file = path.join(__dirname, "..", "data", "day5.txt");
-var seats = fs.readFileSync(file, "utf-8").split("\n");
+var seats = fs.readFileSync(file, "utf-8").trim().split("\n");
 
 let seatId = seats.reduce((acc, seat) => {
   seat = seat.replace(/[BR]/g, 1).replace(/[FL]/g, 0);

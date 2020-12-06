@@ -2,7 +2,7 @@ var fs = require("fs");
 var path = require("path");
 
 let file = path.join(__dirname, "..", "data", "day4.txt");
-var passports = fs.readFileSync(file, "utf-8");
+var passports = fs.readFileSync(file, "utf-8").trim();
 
 passports = passports
   .replace(/\n/g, " ")
