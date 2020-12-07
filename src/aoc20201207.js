@@ -24,10 +24,9 @@ while (addBags) {
 console.log(hasGold.length - 1);
 
 bagRules = bagRules.reduce((acc, rule) => {
-  let [bag, contents] = rule.split(" contain ");
-  bag = bag.replace(/ bags?/, "");
+  let [bag, contents] = rule.split(" bags contain ");
   if (contents == "no other bags.") {
-    acc[bag] = 1;
+    acc[bag] = {};
   } else {
     acc[bag] = contents.split(/, ?/).reduce((acc, content) => {
       let match = content.match(/([0-9]+) (.*) bags?/);
@@ -40,9 +39,6 @@ bagRules = bagRules.reduce((acc, rule) => {
 
 let bagCount = (bag, bagRules) => {
   let subBags = Object.keys(bagRules[bag]);
-  if (Number.isInteger(bagRules[bag])) {
-    return bagRules[bag];
-  }
   return (
     subBags.reduce((acc, subBag) => {
       acc += bagRules[bag][subBag] * bagCount(subBag, bagRules);
