@@ -4,9 +4,7 @@ var path = require("path");
 let file = path.join(__dirname, "..", "data", "day8.txt");
 var instructions = fs.readFileSync(file, "utf-8").trim().split("\n");
 
-let visited = [...Array(instructions.length)].fill(0);
-
-let executeInstruction = function (instruction, acc) {
+let executeInstruction = function (instruction, index, acc) {
   let [operation, a] = instruction.split(" ");
 
   a = parseInt(a);
@@ -25,48 +23,53 @@ let executeInstruction = function (instruction, acc) {
   return [index, acc];
 };
 
-let index = 0;
-let acc = 0;
-while (index < instructions.length) {
-  if (visited[index] == 1) {
-    break;
-  }
-  visited[index]++;
-  [index, acc] = executeInstruction(instructions[index], acc);
-}
-
-console.log(acc);
-
-let nopIndex = 0;
-while (nopIndex < instructions.length) {
-  let alteredInstructions = instructions.slice();
-  if (alteredInstructions[nopIndex].includes("jmp")) {
-    alteredInstructions[nopIndex] = alteredInstructions[nopIndex].replace(
-      /jmp/,
-      "nop"
-    );
-  } else {
-    nopIndex++;
-    continue;
-  }
-
+let executeProgram = function (alteredInstructions) {
   let infiniteLoop = false;
-  visited = [...Array(alteredInstructions.length)].fill(0);
-  index = 0;
-  acc = 0;
+  let visited = [...Array(alteredInstructions.length)].fill(0);
+  let index = 0;
+  let acc = 0;
   while (index < alteredInstructions.length) {
     if (visited[index] == 1) {
       infiniteLoop = true;
       break;
     }
     visited[index]++;
-    [index, acc] = executeInstruction(alteredInstructions[index], acc);
+    [index, acc] = executeInstruction(alteredInstructions[index], index, acc);
   }
-  if (!infiniteLoop) {
-    console.log('nop', nopIndex);
-    break;
-  }
-  nopIndex++;
-}
 
+  return [acc, infiniteLoop];
+};
+
+let [acc, infiniteLoop] = executeProgram(instructions);
+console.log(acc);
+
+let findNop = function () {
+  let infiniteLoop = true;
+  let nopIndex = 0;
+  let acc = 0;
+  while (nopIndex < instructions.length) {
+    let alteredInstructions = instructions.slice();
+    if (alteredInstructions[nopIndex].includes("jmp")) {
+      alteredInstructions[nopIndex] = alteredInstructions[nopIndex].replace(
+        /jmp/,
+        "nop"
+      );
+    } else {
+      nopIndex++;
+      continue;
+    }
+
+    [acc, infiniteLoop] = executeProgram(alteredInstructions);
+
+    if (!infiniteLoop) {
+      console.log("nop", nopIndex);
+      break;
+    }
+    nopIndex++;
+  }
+
+  return acc;
+};
+
+acc = findNop();
 console.log(acc);
