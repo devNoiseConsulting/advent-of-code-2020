@@ -5,18 +5,16 @@ let file = path.join(__dirname, "..", "data", "day7.txt");
 var bagRules = fs.readFileSync(file, "utf-8").trim().split("\n");
 
 let hasGold = ["shiny gold"];
-let addBags = true;
-while (addBags) {
-  addBags = false;
+let addedBags = true;
+while (addedBags) {
+  addedBags = false;
   hasGold.forEach((bag) => {
     bagRules.forEach((rule) => {
-      if (rule.includes(bag)) {
-        let [subBag, contents] = rule.split(" bags contain ");
-        if (!hasGold.includes(subBag)) {
+      let [subBag, contents] = rule.split(" bags contain ");
+      if (contents.includes(bag) && (!hasGold.includes(subBag))) {
           hasGold.push(subBag);
-          addBags = true;
+          addedBags = true;
         }
-      }
     });
   });
 }
