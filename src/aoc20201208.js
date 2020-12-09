@@ -62,7 +62,6 @@ let findNop = function () {
     [acc, infiniteLoop] = executeProgram(alteredInstructions);
 
     if (!infiniteLoop) {
-      console.log("nop", nopIndex);
       break;
     }
     nopIndex++;
