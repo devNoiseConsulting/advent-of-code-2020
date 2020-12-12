@@ -19,12 +19,10 @@ let offsets = [
   [1, 1],
 ];
 
-newLayout = layout.map((row) => row.slice());
 let changing = true;
 while (changing) {
   changing = false;
-  newLayout = layout.map((row) => row.slice());
-  newLayout = newLayout.map((row, x) =>
+  newLayout = layout.map((row, x) =>
     row.map((column, y) => {
       if (column == ".") {
         return column;
@@ -42,11 +40,10 @@ while (changing) {
       let seat = column;
       if (column == "#" && occupiedNeighbors >= 4) {
         seat = "L";
+        changing = true;
       }
       if (column == "L" && occupiedNeighbors == 0) {
         seat = "#";
-      }
-      if (seat !== column) {
         changing = true;
       }
       return seat;
@@ -75,8 +72,7 @@ layout = fs
 changing = true;
 while (changing) {
   changing = false;
-  newLayout = layout.map((row) => row.slice());
-  newLayout = newLayout.map((row, x) =>
+  newLayout = layout.map((row, x) =>
     row.map((column, y) => {
       if (column == ".") {
         return column;
@@ -107,11 +103,10 @@ while (changing) {
       let seat = column;
       if (column == "#" && occupiedNeighbors >= 5) {
         seat = "L";
+        changing = true;
       }
       if (column == "L" && occupiedNeighbors == 0) {
         seat = "#";
-      }
-      if (seat !== column) {
         changing = true;
       }
       return seat;
