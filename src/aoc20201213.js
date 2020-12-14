@@ -1,7 +1,5 @@
-const { schedulingPolicy } = require("cluster");
 var fs = require("fs");
 var path = require("path");
-const { inflate } = require("zlib");
 
 let file = path.join(__dirname, "..", "data", "day13.txt");
 let [startTime, schedule] = fs.readFileSync(file, "utf-8").trim().split("\n");
