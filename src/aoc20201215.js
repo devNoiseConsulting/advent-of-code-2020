@@ -1,7 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 
-let file = path.join(__dirname, "..", "data", "day15t.txt");
+let file = path.join(__dirname, "..", "data", "day15.txt");
 let numbers = fs
   .readFileSync(file, "utf-8")
   .trim()
@@ -9,10 +9,7 @@ let numbers = fs
   .split(",")
   .map((e) => parseInt(e));
 
-let numberLastSeen = numbers.reduce((acc, v, i, arr) => {
-    acc[v] = i;
-    return acc;
-}, {});
+let bulkRun = numbers.slice();
 
 let numberSeen = numbers.reduce((acc, v, i, arr) => {
   acc[v] = i;
@@ -42,6 +39,12 @@ while (i < max) {
 }
 
 console.log(numbers[numbers.length - 1]);
+
+numbers = [...bulkRun];
+let numberLastSeen = numbers.reduce((acc, v, i, arr) => {
+  acc[v] = i;
+  return acc;
+}, {});
 
 max = 30000000;
 let previousNumber = numbers[numbers.length - 1];
