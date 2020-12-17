@@ -69,12 +69,7 @@ for (i = 0; i < validTickets[0].length; i++) {
   });
 }
 
-let fieldPositions = possibleFields.reduce((acc, field, i) => {
-  if (field.length == 1) {
-    acc[field[0]] = i;
-  }
-  return acc;
-}, {});
+let fieldPositions = {};
 
 let repeat = true;
 while (repeat) {
