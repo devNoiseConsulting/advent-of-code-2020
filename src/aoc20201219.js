@@ -26,11 +26,24 @@ let regexLetters = Object.keys(messageRules).reduce((acc, key) => {
   return acc;
 }, []);
 
+let insertSubRule = (match, p1, offset, string) => {
+  // console.log(p1);
+  return " (" + messageRules[p1] + ") ";
+};
+
 // Comment out the folowing code if you want Part 1's answer.
 // Start of Part 2
 messageRules[8] = " 42 + ";
+
+// messageRules[11]= " 42 31 | 42 11 31 ";
+// for (let i = 0; i < 4; i++) {
+//   console.log(messageRules[11]);
+//   messageRules[11] = messageRules[11].replace(/ 11 /g, insertSubRule);
+// }
+// messageRules[11] = messageRules[11].replace(/ 11 /g, " ");
+
 let loopRule = (loopReplace = " 42 11 31 ");
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 5; i++) {
   loopRule = loopRule.replace(/ 11 /g, loopReplace);
   messageRules[11] += "|" + loopRule;
 }
@@ -50,10 +63,6 @@ messageRules[11] = messageRules[11].replace(/ 11 /g, " ");
 //   acc[key] = rule;
 //   return acc;
 // }, messageRules);
-
-let insertSubRule = (match, p1, offset, string) => {
-  return " ( " + messageRules[p1] + " ) ";
-};
 
 messageRules = Object.keys(messageRules).reduce((acc, key) => {
   let rule = messageRules[key];
